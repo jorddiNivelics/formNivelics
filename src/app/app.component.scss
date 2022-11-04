@@ -36,10 +36,18 @@ input, mat-option{
   color:rgb(82, 79, 79);
 }
 form {
-  padding: $ruler;
+  padding: $ruler*3;
   width: $ruler*20;
   margin: 0 auto;
-  padding-bottom: 100px;
+  padding-bottom: 30px;
+
+  margin-top: 30px;
+  margin-bottom: 30px!important;
+  color:#61677C;
+  font-weight: bold;
+  border-radius: $ruler;
+  box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
+  transition: all 0.2s ease-in-out;
 }
 
 .segment {
@@ -90,7 +98,7 @@ input, mat-option, mat-select {
   }
 }
 
-button {
+button{
   margin-top: 30px;
   color:#61677C;
   font-weight: bold;
