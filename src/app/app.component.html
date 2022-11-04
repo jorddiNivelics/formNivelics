@@ -1,47 +1,195 @@
-<div class="form-container">
-  <form [formGroup]="form" autocomplete="on">
-
+<form [formGroup]="form" autocomplete="off    ">
+  <div class="segment">
+    <h1>Resgistrese para solicitar un aumento</h1>
+  </div>
     <div  class="form">
-      <mat-form-field appearance="outline">
-        <mat-label>Nombre</mat-label>
-        <input matInput type="text" formControlName="firsName">
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Apellido</mat-label>
-        <input matInput type="text" formControlName="lastName">
-      </mat-form-field>
-
-
-      <mat-form-field appearance="outline">
-        <mat-label>Tipo de documento</mat-label>
-        <input matInput type="text" formControlName="typeId">
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Numero de documento</mat-label>
-        <input matInput type="text" formControlName="idNumber">
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Celular</mat-label>
-        <input matInput type="text" formControlName="phoneNumber">
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Ciudad</mat-label>
-        <input matInput type="text" formControlName="city">
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Contraseña</mat-label>
-        <input matInput type="text" formControlName="password">
-      </mat-form-field>
+      <div class="form-item">
+        <mat-form-field appearance="none">
+          <label>
+            <input matInput type="text" formControlName="firsName" placeholder="Nombre">
+          </label>
+        </mat-form-field>
+        <div *ngIf="form.get('firsName').touched">
+          <p class="error" *ngIf="form.get('firsName').getError('required')">
+              El nombre es requerido.
+          </p>
+          <p class="error" *ngIf="form.get('firsName').getError('pattern')">
+            Ingrese un nombre válido, no debe contener  <br> números ni caracteres especiales.
+          </p>
+          <p class="error" *ngIf="form.get('firsName').hasError('minlength') && !form.get('firsName').getError('pattern')">
+            El nombre debe tener mínimo tres caracteres.
+          </p>
+          <p class="error" *ngIf="form.get('firsName').hasError('maxlength') && !form.get('firsName').getError('pattern')">
+            El nombre debe tener máximo 15 caracteres.
+          </p>
+        </div>
     </div>
 
-      <div  class="register">
-        <button type="submit">Registrarse</button>
+    <div>
+      <mat-form-field appearance="none">
+        <label>
+          <input matInput type="text" formControlName="lastName" placeholder="Apellido">
+        </label>
+      </mat-form-field>
+      <div *ngIf="form.get('lastName').touched">
+        <p class="error" *ngIf="form.get('lastName').getError('required')">
+            El apellido es requerido.
+        </p>
+        <p class="error" *ngIf="form.get('lastName').getError('pattern')">
+          Ingrese un apellido válido, no debe contener <br> números ni caracteres especiales.
+        </p>
+        <p class="error" *ngIf="form.get('lastName').hasError('minlength') && !form.get('lastName').getError('pattern')">
+          El apellido debe tener mínimo tres caracteres.
+        </p>
+        <p class="error"*ngIf="form.get('lastName').hasError('maxlength') && !form.get('lastName').getError('pattern')">
+          El apellido debe tener máximo 15 caracteres.
+        </p>
       </div>
+  </div>
 
-  </form>
+  <div>
+      <mat-form-field appearance="none">
+        <label>
+          <mat-select
+                name="typeDocument"
+                formControlName="typeId"
+                placeholder="Tipo de documento"
+                (selectionChange)="validateRequired($event.value)"
+                placeholder="Tipo de documento"
+              >
+              <mat-option [value]="option.id" *ngFor="let option of typeDocument">
+                {{option.value}}
+              </mat-option>
+        </mat-select>
+        </label>
+    </mat-form-field>
+  </div>
+
+  <div>
+      <mat-form-field appearance="none">
+        <label>
+          <input matInput type="text" formControlName="idNumber" placeholder="Número de documento">
+        </label>
+      </mat-form-field>
+      <div *ngIf="form.get('idNumber').touched">
+        <p class="error" *ngIf="form.get('idNumber').getError('required')">
+            {{messageError}} es requerido
+        </p>
+        <p class="error" *ngIf="form.get('idNumber').getError('pattern')">
+          Ingrese un documento válido, no debe contener letras.
+        </p>
+        <p class="error" *ngIf="form.get('idNumber').hasError('minlength') && !form.get('idNumber').getError('pattern')">
+          {{messageError}} debe tener mínimo 5 caracteres.
+        </p>
+        <p class="error"*ngIf="form.get('idNumber').hasError('maxlength') && !form.get('idNumber').getError('pattern')">
+          {{messageError}} debe tener máximo 10 caracteres.
+        </p>
+      </div>
+  </div>
+
+  <div>
+      <mat-form-field appearance="none">
+        <label>
+          <input matInput type="tel" formControlName="phoneNumber" placeholder="Celular">
+        </label>
+      </mat-form-field>
+      <div *ngIf="form.get('phoneNumber').touched">
+        <p class="error" *ngIf="form.get('phoneNumber').getError('required')">
+            El número de celular es requerido
+        </p>
+        <p class="error" *ngIf="form.get('phoneNumber').getError('pattern')">
+          Ingrese un número de celular válido.
+        </p>
+        <p class="error" *ngIf="form.get('phoneNumber').hasError('minlength') && !form.get('phoneNumber').getError('pattern')">
+          El número de celular debe tener mínimo 5 caracteres.
+        </p>
+        <p class="error"*ngIf="form.get('phoneNumber').hasError('maxlength') && !form.get('phoneNumber').getError('pattern')">
+          El número de celular debe tener máximo 10 caracteres.
+        </p>
+      </div>
+  </div>
+
+  <div>
+      <mat-form-field class="example-full-width" appearance="none">
+        <label>
+          <input type="text" matInput formControlName="city" [matAutocomplete]="auto" placeholder="Ciudad">
+        </label>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredCity | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div *ngIf="form.get('city').touched">
+        <p class="error" *ngIf="form.get('city').getError('required')">
+            Selecione una ciudad.
+        </p>
+        <p class="error" *ngIf="form.get('city').getError('pattern')">
+          Ingrese una ciudad válida.
+        </p>
+      </div>
+  </div>
+
+  <div>
+       <mat-form-field appearance="none">
+        <label>
+          <input matInput type="email" formControlName="email" placeholder="Email">
+        </label>
+      </mat-form-field>
+      <div *ngIf="form.get('email').touched">
+        <p class="error" *ngIf="form.get('email').getError('required')">
+            El email es requerido.
+        </p>
+        <p class="error" *ngIf="form.get('email').getError('pattern')">
+          Lo sientimo, solo se letras (a-z), números (0-9) y puntos (.).
+        </p>
+      </div>
+  </div>
+
+  <div>
+      <mat-form-field appearance="none">
+        <label>
+          <input matInput type="password" formControlName="password" placeholder="Contraseña">
+        </label>
+      </mat-form-field>
+      <div *ngIf="form.get('password').touched">
+        <p class="error" *ngIf="form.get('password').getError('required')">
+            la contraseña es requerida.
+        </p>
+        <p class="error" *ngIf="form.get('password').getError('pattern')">
+          la contraseña debe contener mínimo una mayuscula, una minuscula, <br> un número y un caracter especial.
+        </p>
+        <p class="error" *ngIf="form.get('password').hasError('maxlength') && !form.get('password').getError('pattern')">
+          la contraseña debe contener máximo 15 caracteres.
+        </p>
+        <p class="error" *ngIf="form.get('password').hasError('minlength') && !form.get('password').getError('pattern')">
+          la contraseña debe contener mínimo 8 caracteres.
+        </p>
+      </div>
+  </div>
+
+  <div>
+      <mat-form-field appearance="none">
+        <label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="birthDay"
+            [max]="maxDate"
+            placeholder="Fecha de nacimiento"
+            (click)="picker.open()"
+            >
+          </label>
+          <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    <div *ngIf="form.get('birthDay').touched">
+      <p class="error" *ngIf="form.get('birthDay').getError('required')">
+          La fecha de nacimiento es requerida.
+      </p>
+    </div>
 </div>
+    </div>
+      <div  class="register">
+        <button (click)="register()" class="red">Registrarse</button>
+      </div>
+</form>

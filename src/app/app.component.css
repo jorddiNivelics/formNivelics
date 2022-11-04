@@ -1,0 +1,54 @@
+.form-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+}
+
+.form-container .form {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: .9fr .9fr;
+      grid-template-rows: .9fr .9fr;
+  grid-gap: 10px;
+}
+
+.form-container .form .form-item {
+  margin: 0;
+  padding: 0px;
+}
+
+.form-container .form .mat-form-field {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.form-container .register {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.error {
+  color: #c72222;
+  font-size: 11px;
+  padding: 0;
+  margin-top: -10px !important;
+  margin-bottom: 0px !important;
+}
+/*# sourceMappingURL=app.component.css.map */
